@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI 계산기</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            transition: background-color 0.5s;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            width: 80%;
+            font-size: 16px;
+        }
+        .result {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>BMI 계산기</h2>
+        <label for="weight">(kg):</label>
+        <input type="number" id="weight" placeholder="체중 입력">
+        <label for="height">(cm):</label>
+        <input type="number" id="height" placeholder="키 입력">
+        <button onclick="calculateBMI()">계산하기</button>
+        <div class="result" id="result"></div>
+    </div>
+    <script>
+        function calculateBMI() {
+            let weight = parseFloat(document.getElementById('weight').value);
+            let height = parseFloat(document.getElementById('height').value) / 100;
+            let bmi = (weight / (height * height)).toFixed(2);
+            let resultText = `와! 당신의 BMI 지수는 ${bmi} 입니다. `;
+            let bgColor = "#ffffff";
+            
+            if (bmi < 18.5) {
+                resultText += "저체중이네요. 영양을 더 신경 쓰고 건강한 식단을 유지하세요.";
+                bgColor = "#FFA07A"; // 주황색
+            } else if (bmi >= 18.5 && bmi < 24.9) {
+                resultText += "축하합니다! 정상 체중입니다. 지금처럼 건강을 유지하세요.";
+                bgColor = "#90EE90"; // 초록색
+            } else if (bmi >= 25 && bmi < 29.9) {
+                resultText += "과체중입니다. 규칙적인 운동과 식이조절이 필요합니다.";
+                bgColor = "#FFD700"; // 노란색
+            } else {
+                resultText += "비만입니다. 건강을 위해 생활 습관을 개선해야 합니다!";
+                bgColor = "#FF4500"; // 빨간색
+            }
+            
+            document.getElementById('result').innerText = resultText;
+            document.body.style.backgroundColor = bgColor;
+        }
+    </script>
+</body>
+</html>
